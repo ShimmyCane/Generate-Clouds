@@ -2,7 +2,7 @@
 (function () {
   'use strict';
   var GC = window.GC = window.GC || {};
-  GC.VERSION = '0.7.2';
+  GC.VERSION = '0.7.3';
 
   var KEY = 'gc.settings';
   GC.DEFAULTS = { quality: 'med', span: 60, play: 60, figures: 0, autoplay: 1, compass: 1, turn: 60, sound: 1, bar: 1, relief: 1, clouds: 1, showErrors: false };
@@ -45,4 +45,9 @@
   var POINTS = ['N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE', 'SSE', 'S', 'SSW', 'SW', 'WSW', 'W', 'WNW', 'NW', 'NNW'];
   GC.compass = function (degFromNorth) { return POINTS[Math.round((((degFromNorth % 360) + 360) % 360) / 22.5) % 16]; };
   GC.$ = function (id) { return document.getElementById(id); };
+  // How many network loads are running: a thin bar at the top of the page shows while any is.
+  GC.busy = {
+    n: 0,
+    add: function (d) { this.n = Math.max(0, this.n + d); var el = document.getElementById('loadBar'); if (el) el.hidden = this.n === 0; }
+  };
 })();

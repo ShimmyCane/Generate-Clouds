@@ -52,7 +52,7 @@
       uCmix: { value: 0 }, uPrecip: v4(), uFeat: v4(), uFeatB: v4(),
       uTerrainF: { value: null }, uWorld: { value: null }, uRegion2: { value: null }, uFine: v4(), uReg2: v4(), uSea2: v4(), uWorldP: v3(),
       uStars: { value: null }, uStarsOn: { value: 0 }, uSat: { value: null }, uSatW: { value: 0 }, uOsm: { value: null }, uOsmOn: { value: 0 },
-      uWindL: { value: null }, uWindM: { value: null }, uWindH: { value: null }, uWindOn: { value: 0 }, uWindT: { value: 0 },
+      uWindL: { value: null }, uWindM: { value: null }, uWindH: { value: null }, uWindOn: { value: 0 }, uWindT: { value: 0 }, uClock: { value: 0 },
       uWindRefL: { value: new THREE.Vector2() }, uWindRefM: { value: new THREE.Vector2() }, uWindRefH: { value: new THREE.Vector2() }
     };
     U.uStars.value = blank(); U.uSat.value = blank(); U.uOsm.value = blank(); U.uWindL.value = blank(); U.uWindM.value = blank(); U.uWindH.value = blank();
@@ -245,6 +245,7 @@
     U.uWorldP.value.set(GC.rad(lat0), GC.rad(lon0), R.worldOn);
     U.uSatW.value = R.satW || 0; U.uStarsOn.value = R.starsOn ? 1 : 0; U.uOsmOn.value = R.osmOn ? 1 : 0;
     U.uWindOn.value = R.windOn ? (R.windW || 0) : 0; U.uWindT.value = R.windT || 0;
+    U.uClock.value = performance.now() / 1000;      // wall-clock seconds: the stars twinkle in any view
     U.uSea.value.set(F.sea[0], R.clock, F.sea[1], F.sea[2]);
     // regional data is used unless the cover was set by hand; far-away variety always
     U.uReg.value.set(F.regionMix * R.regionOn, 250, 1, 0);

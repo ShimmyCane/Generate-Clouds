@@ -37,6 +37,17 @@
 - [ ] The Earth picture looks right from space on the iPad, and the far ground is not too slow.
 - [ ] Mark notes done in the database after Jimmy confirms which (see `convo/notes v1.md`).
 
+## Round 8 (2026-11-19, `notes v3.md`, built in 0.7.3, see `convo v0.14.md`)
+- [x] Stars smaller, dimmer and twinkling (note 8).
+- [x] Loading bar for weather requests (note 9); terrain and map tiles not yet.
+- [x] Panels fade after 10 s, back on hover or tap (note 10).
+- [ ] Ground square following the camera; continents from space; pinned place losing land (notes 1, 4, 5).
+- [ ] Top 100 cities and landmarks as high-resolution ground (note 2): list and source to confirm.
+- [ ] Live cloud model for space, with dated fallback and synthetic set (note 3).
+- [ ] Alternate weather sources (note 6): research.
+- [ ] Profile and speed up the frame rate (note 7).
+- [ ] Confirm the "above 5x" removal (notes v2 item 3): database says done, convo v0.13 withdrew it.
+
 ## Round 7 (2026-11-18, convo v0.10 answers, built in 0.7.0, see convo v0.11)
 - [x] 24-hour time lapse from now, forecast-driven; tide along the bar.
 - [x] Waves clip with 15/30/60 s length and a 0.5× / 1× / 2× snapping speed slider.
