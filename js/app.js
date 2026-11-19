@@ -46,6 +46,18 @@
     function show(v) { document.body.dataset.panels = v ? 'on' : 'off'; $('panelsToggle').setAttribute('aria-expanded', String(v)); }
     show(on);
     $('panelsToggle').addEventListener('click', function () { on = document.body.dataset.panels !== 'on'; show(on); GC.store.set('gc.panelsOn', on); });
+
+    // Panels fade after 10 seconds with the pointer off them and no touch; hovering, tapping or focusing one brings it back.
+    var idleT = 0, inside = false, panelsEl = $('panels');
+    function arm() {
+      clearTimeout(idleT); document.body.classList.remove('idle');
+      if (!inside) idleT = setTimeout(function () { document.body.classList.add('idle'); }, 10000);
+    }
+    panelsEl.addEventListener('pointerenter', function () { inside = true; arm(); });
+    panelsEl.addEventListener('pointerleave', function () { inside = false; arm(); });
+    panelsEl.addEventListener('pointerdown', arm);
+    panelsEl.addEventListener('focusin', arm);
+    arm();
   }
 
   // ---------- the model: the 24 hours of sky, from the weather and the overrides by hand ----------

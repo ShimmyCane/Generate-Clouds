@@ -48,7 +48,8 @@
       var a = St.altaz(s[0], s[1], place.lat, place.lon, utcMs);
       if (a.alt < -4) return;                                        // below the horizon for good: not drawn
       var x = a.az / 360 * PW, y = (90 - a.alt) / 180 * PH, mag = s[2];
-      var rad = GC.clamp(0.9 - 0.1 * mag, 0.45, 1.5), I = GC.clamp(1.2 - 0.2 * mag, 0.25, 1.0), c = colourOf(s[3]);
+      // smaller and dimmer than before: points of light, not discs
+      var rad = GC.clamp(0.55 - 0.07 * mag, 0.25, 0.9), I = GC.clamp(0.9 - 0.15 * mag, 0.2, 0.7), c = colourOf(s[3]);
       var xs = [x]; if (x < rad * 3) xs.push(x + PW); if (x > PW - rad * 3) xs.push(x - PW);
       xs.forEach(function (xx) {
         var gr = g.createRadialGradient(xx, y, 0, xx, y, rad * 2.6);

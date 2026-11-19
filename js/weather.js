@@ -28,6 +28,7 @@
   function fetchJson(url, ms) {
     var ctl = ('AbortController' in window) ? new AbortController() : null;
     var timer = setTimeout(function () { if (ctl) ctl.abort(); }, ms || 15000);
+    GC.busy.add(1);
     return fetch(url, ctl ? { signal: ctl.signal } : {}).then(function (r) {
       return r.json().catch(function () { return {}; }).then(function (j) {
         if (!r.ok || j.error) {
@@ -37,7 +38,7 @@
         }
         return j;
       });
-    }).finally(function () { clearTimeout(timer); });
+    }).finally(function () { clearTimeout(timer); GC.busy.add(-1); });
   }
 
   function placeKey(p) { return p.lat.toFixed(2) + ',' + p.lon.toFixed(2); }

@@ -65,6 +65,7 @@ uniform float uOsmOn;            // 1 when the map colours are loaded
 uniform sampler2D uWindL; uniform sampler2D uWindM; uniform sampler2D uWindH;   // wind over the Earth at 850, 500, 300 hPa: 9 x 7 points, (east, south) km a second
 uniform float uWindOn;           // how much the wind grid counts (0 near the ground, 1 from space)
 uniform float uWindT;            // seconds of sky since the start, for the wind to carry the clouds
+uniform float uClock;            // wall-clock seconds, for the stars to twinkle
 uniform vec2 uWindRefL; uniform vec2 uWindRefM; uniform vec2 uWindRefH;   // the wind at the place: the clouds' own drift is measured from it
 
 const float PI = 3.14159265;
@@ -309,7 +310,9 @@ vec4 cirrus(vec3 ro, vec3 rd, float t, vec3 bg) {
 // the bright stars from the star picture (see js/stars.js): the ray's azimuth across, its altitude up
 vec3 starMap(vec3 rd) {
   float az = atan(rd.x, -rd.z); float alt = asin(clamp(rd.y, -1.0, 1.0));
-  return texture2D(uStars, vec2(fract(az / (2.0 * PI) + 1.0), alt / PI + 0.5)).rgb;
+  // each star flickers at its own rate and phase (the phase comes from its direction), 70% to 100% brightness
+  float tw = 0.85 + 0.15 * sin(uClock * (1.6 + 0.8 * fract(sin(dot(rd, vec3(12.9, 78.2, 37.7))) * 43758.5)) + 60.0 * dot(rd, vec3(0.37, 0.61, 0.71)));
+  return texture2D(uStars, vec2(fract(az / (2.0 * PI) + 1.0), alt / PI + 0.5)).rgb * tw;
 }
 vec3 stars(vec3 rd) {
   vec3 d = rd * 190.0; vec3 c = floor(d); float h = hash13(c);
