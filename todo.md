@@ -75,6 +75,7 @@
 - [ ] Speed on iPad with terrain and waves; thunder sound after pressing play.
 
 ## Next candidates
+- [ ] Other cloud forms from above (cloud streets, lenticular, mammatus, wave clouds, roll cloud, cloud holes, valley fog). Stubs in `research/05 cloud forms seen from above - stubs.md`; not designed yet.
 - [ ] Finer ground near the camera (a second, closer height grid), rivers and lakes, buildings for a city view.
 - [ ] Rain and surf sound; rainbow; wet ground.
 - [ ] Storm structure: a rotating updraught, wall cloud and funnel as a drawn sample (made-up, labelled as such); radar as the map of real cells. (waiting on convo v0.1)
